@@ -1,11 +1,48 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8">
-<title th:text="${titulo}"></title>
-</head>
+<head th:replace="layout/layout :: head"></head>
 <body>
-	<h4 th:text="${titulo}"></h4>
-	
+	<header th:replace="layout/layout :: header"></header>
+
+	<div class="container">
+		<h4 th:text="${titulo}"></h4>
+		<a class="btn btn-primary btn-xs" th:href="@{/vacante/crear}"
+			th:text="'Crear vacante'"></a>
+		<table class="table table-bordered table-striped my-4">
+			<thead class="thead-dark">
+				<tr>
+					<th>Id</th>
+					<th>Título</th>
+					<th>Salario mínimo</th>
+					<th>Salario máximo</th>
+					<th>Habilidades requeridas</th>
+					<th>Habilidades deseables</th>
+					<th>Editar</th>
+					<th>Eliminar</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:if="${not #lists.isEmpty(vacantes)}"
+					th:each="vacante: ${vacantes}">
+					<td th:text="${vacante.id}"></td>
+					<td th:text="${vacante.titulo}"></td>
+					<td th:text="${vacante.salarioMin}"></td>
+					<td th:text="${vacante.salarioMax}"></td>
+					<td th:text="${vacante.habilidadesRequeridas}"></td>
+					<td th:text="${vacante.habilidadesDeseadas}"></td>
+					<td><a th:href="@{'/vacante/editar/' + ${vacante.id}}"
+						class="btn btn-success btn-xs" th:text="'Editar'"></a></td>
+					<td><a th:href="@{'/vacante/eliminar/' + ${vacante.id}}"
+						class="btn btn-danger btn-xs" th:text="'Eliminar'"></a></td>
+				</tr>
+				<tr class="text-center" th:if="${#lists.isEmpty(vacantes)}">
+					<td colspan="8">No hay vacantes para mostrar</td>
+				</tr>
+			</tbody>
+		</table>
+		<nav th:replace="paginator :: paginator"></nav>
+	</div>
+
+	<footer th:replace="layout/layout :: footer"></footer>
 </body>
 </html>

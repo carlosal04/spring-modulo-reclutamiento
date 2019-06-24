@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body>
+	<header th:replace="layout/layout :: header"></header>
+
+	<div class="container">
+		<h4 th:text="${titulo}"></h4>
+		<form th:action="@{/vacante/guardar}" th:object="${vacante}"
+			method="POST">
+
+			<div class="form-group row">
+				<label for="titulo" class="col-sm-2 col-form-label">Título</label>
+				<div class="col-sm-6">
+					<input type="text" th:field="*{titulo}" class="form-control"
+						th:errorclass="'form-control is-invalid'" />
+					<div class="invalid-feedback"
+						th:if="${#fields.hasErrors('titulo')}" th:errors="*{titulo}"></div>
+				</div>
+			</div>
+
+			<div class="form-group row">
+				<label for="salarioMin" class="col-sm-2 col-form-label">Salario
+					mínimo</label>
+				<div class="col-sm-6">
+					<div class="input-group mb-3">
+						<div class="input-group-prepend">
+							<span class="input-group-text">$</span>
+						</div>
+						<input type="text" th:field="*{salarioMin}" class="form-control"
+							th:errorclass="'form-control is-invalid'">
+						<div class="input-group-append">
+							<span class="input-group-text">.00</span>
+						</div>
+					</div>
+					<div class="invalid-feedback"
+						th:if="${#fields.hasErrors('salarioMin')}"
+						th:errors="*{salarioMin}"></div>
+				</div>
+			</div>
+
+			<div class="form-group row">
+				<label for="salarioMax" class="col-sm-2 col-form-label">Salario
+					máximo</label>
+				<div class="col-sm-6">
+					<div class="input-group mb-3">
+						<div class="input-group-prepend">
+							<span class="input-group-text">$</span>
+						</div>
+						<input type="text" th:field="*{salarioMax}" class="form-control"
+							th:errorclass="'form-control is-invalid'">
+						<div class="input-group-append">
+							<span class="input-group-text">.00</span>
+						</div>
+					</div>
+					<div class="invalid-feedback"
+						th:if="${#fields.hasErrors('salarioMax')}"
+						th:errors="*{salarioMax}"></div>
+				</div>
+			</div>
+
+			<div class="form-group row">
+				<label for="habilidadesRequeridas" class="col-sm-2 col-form-label">Habilidades
+					requeridas</label>
+				<div class="col-sm-6">
+					<input type="text" th:field="*{habilidadesRequeridas}"
+						class="form-control" th:errorclass="'form-control is-invalid'" />
+					<div class="invalid-feedback"
+						th:if="${#fields.hasErrors('habilidadesRequeridas')}"
+						th:errors="*{habilidadesRequeridas}"></div>
+				</div>
+			</div>
+
+			<div class="form-group row">
+				<label for="habilidadesDeseadas" class="col-sm-2 col-form-label">Habilidades
+					deseadas</label>
+				<div class="col-sm-6">
+					<input type="text" th:field="*{habilidadesDeseadas}"
+						class="form-control" th:errorclass="'form-control is-invalid'" />
+					<div class="invalid-feedback"
+						th:if="${#fields.hasErrors('habilidadesDeseadas')}"
+						th:errors="*{habilidadesDeseadas}"></div>
+				</div>
+			</div>
+
+			<div class="form-group row">
+				<div class="col-sm-6">
+					<input type="submit" th:value="${titulo}" class="btn btn-primary" />
+				</div>
+			</div>
+
+		</form>
+	</div>
+
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

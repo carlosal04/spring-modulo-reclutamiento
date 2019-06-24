@@ -28,14 +28,17 @@ public class Vacante implements Serializable {
 	@NotEmpty
 	private String titulo;
 	
+	@Column(name = "salario_minimo", columnDefinition = "Decimal(10,2) default '0.00'")
 	private Double salarioMin;
 	
+	@Column(name = "salario_maximo", columnDefinition = "Decimal(10,2) default '0.00'")
 	private Double salarioMax;
 	
-	@Column(name = "habilidad_requerida")
+	@NotEmpty
+	@Column(name = "habilidades_requeridas")
 	private String habilidadesRequeridas;
 	
-	@Column(name = "habilidad_deseada")
+	@Column(name = "habilidades_deseadas")
 	private String habilidadesDeseadas;
 	
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -75,14 +78,24 @@ public class Vacante implements Serializable {
 		this.salarioMax = salarioMax;
 	}
 
-	public void addHabilidadesRequeridas(String habilidad) {
-		this.habilidadesRequeridas += habilidad.concat(" \n");
-	}
 	
-	public void addHabilidadesDeseadas(String habilidad) {
-		this.habilidadesDeseadas += habilidad.concat(" \n");
-	}
 	
+	public String getHabilidadesRequeridas() {
+		return habilidadesRequeridas;
+	}
+
+	public void setHabilidadesRequeridas(String habilidadesRequeridas) {
+		this.habilidadesRequeridas = habilidadesRequeridas;
+	}
+
+	public String getHabilidadesDeseadas() {
+		return habilidadesDeseadas;
+	}
+
+	public void setHabilidadesDeseadas(String habilidadesDeseadas) {
+		this.habilidadesDeseadas = habilidadesDeseadas;
+	}
+
 	public List<Candidato> getCandidatos() {
 		return this.candidatos;
 	}
