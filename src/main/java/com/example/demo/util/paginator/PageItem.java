@@ -2,17 +2,17 @@ package com.example.demo.util.paginator;
 
 public class PageItem {
 
-	private int numero;
-	private boolean actual;
-	public PageItem(int numero, boolean actual) {
-		this.numero = numero;
-		this.actual = actual;
+	private int number;
+	private boolean current;
+	public PageItem(int number, boolean current) {
+		this.number = number;
+		this.current = current;
 	}
-	public int getNumero() {
-		return numero;
+	public int getNumber() {
+		return number;
 	}
-	public boolean isActual() {
-		return actual;
+	public boolean isCurrent() {
+		return current;
 	}
 	
 	

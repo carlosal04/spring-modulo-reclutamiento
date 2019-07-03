@@ -16,8 +16,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
 @Entity
-@Table(name = "vacantes")
-public class Vacante implements Serializable {
+@Table(name = "vacants")
+public class Vacant implements Serializable {
 
 	private static final long serialVersionUID = 8430041856756088810L;
 	
@@ -26,26 +26,26 @@ public class Vacante implements Serializable {
 	private Long id;
 	
 	@NotEmpty
-	private String titulo;
+	private String title;
 	
-	@Column(name = "salario_minimo", columnDefinition = "Decimal(10,2) default '0.00'")
-	private Double salarioMin;
+	@Column(name = "min_salary", columnDefinition = "Decimal(10,2) default '0.00'")
+	private Double minSalary;
 	
-	@Column(name = "salario_maximo", columnDefinition = "Decimal(10,2) default '0.00'")
-	private Double salarioMax;
+	@Column(name = "max_salary", columnDefinition = "Decimal(10,2) default '0.00'")
+	private Double maxSalary;
 	
 	@NotEmpty
-	@Column(name = "habilidades_requeridas")
-	private String habilidadesRequeridas;
+	@Column(name = "required_skills")
+	private String requiredSkills;
 	
-	@Column(name = "habilidades_deseadas")
-	private String habilidadesDeseadas;
+	@Column(name = "wishable_skills")
+	private String wishableSkills;
 	
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "candidato_id")
-	private List<Candidato> candidatos;
+	@JoinColumn(name = "candidate_id")
+	private List<Candidate> candidates;
 	
-
+	
 	public Long getId() {
 		return id;
 	}
@@ -54,54 +54,52 @@ public class Vacante implements Serializable {
 		this.id = id;
 	}
 
-	public String getTitulo() {
-		return titulo;
+	public String getTitle() {
+		return title;
 	}
 
-	public void setTitulo(String titulo) {
-		this.titulo = titulo;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
-	public Double getSalarioMin() {
-		return salarioMin;
+	public Double getMinSalary() {
+		return minSalary;
 	}
 
-	public void setSalarioMin(Double salarioMin) {
-		this.salarioMin = salarioMin;
+	public void setMinSalary(Double minSalary) {
+		this.minSalary = minSalary;
 	}
 
-	public Double getSalarioMax() {
-		return salarioMax;
+	public Double getMaxSalary() {
+		return maxSalary;
 	}
 
-	public void setSalarioMax(Double salarioMax) {
-		this.salarioMax = salarioMax;
+	public void setMaxSalary(Double maxSalary) {
+		this.maxSalary = maxSalary;
 	}
 
-	
-	
-	public String getHabilidadesRequeridas() {
-		return habilidadesRequeridas;
+	public String getRequiredSkills() {
+		return requiredSkills;
 	}
 
-	public void setHabilidadesRequeridas(String habilidadesRequeridas) {
-		this.habilidadesRequeridas = habilidadesRequeridas;
+	public void setRequiredSkills(String requiredSkills) {
+		this.requiredSkills = requiredSkills;
 	}
 
-	public String getHabilidadesDeseadas() {
-		return habilidadesDeseadas;
+	public String getWishableSkills() {
+		return wishableSkills;
 	}
 
-	public void setHabilidadesDeseadas(String habilidadesDeseadas) {
-		this.habilidadesDeseadas = habilidadesDeseadas;
+	public void setWishableSkills(String wishableSkills) {
+		this.wishableSkills = wishableSkills;
 	}
 
-	public List<Candidato> getCandidatos() {
-		return this.candidatos;
+	public List<Candidate> getCandidates() {
+		return this.candidates;
 	}
 	
-	public void addCandidato(Candidato candidato) {
-		this.candidatos.add(candidato);
+	public void addCandidato(Candidate candidate) {
+		this.candidates.add(candidate);
 	}
 
 }

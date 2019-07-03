@@ -5,87 +5,87 @@
 	<header th:replace="layout/layout :: header"></header>
 
 	<div class="container">
-		<h4 th:text="${titulo}"></h4>
-		<form th:action="@{/vacante/guardar}" th:object="${vacante}"
+		<h4 th:text="${title}"></h4>
+		<form th:action="@{/vacante/guardar}" th:object="${vacant}"
 			method="POST">
-
+			<input type="hidden" th:field="*{id}"/>
 			<div class="form-group row">
-				<label for="titulo" class="col-sm-2 col-form-label">Título</label>
+				<label for="title" class="col-sm-2 col-form-label">Título</label>
 				<div class="col-sm-6">
-					<input type="text" th:field="*{titulo}" class="form-control"
+					<input type="text" th:field="*{title}" class="form-control"
 						th:errorclass="'form-control is-invalid'" />
 					<div class="invalid-feedback"
-						th:if="${#fields.hasErrors('titulo')}" th:errors="*{titulo}"></div>
+						th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></div>
 				</div>
 			</div>
 
 			<div class="form-group row">
-				<label for="salarioMin" class="col-sm-2 col-form-label">Salario
+				<label for="minSalary" class="col-sm-2 col-form-label">Salario
 					mínimo</label>
 				<div class="col-sm-6">
 					<div class="input-group mb-3">
 						<div class="input-group-prepend">
 							<span class="input-group-text">$</span>
 						</div>
-						<input type="text" th:field="*{salarioMin}" class="form-control"
+						<input type="text" th:field="*{minSalary}" class="form-control"
 							th:errorclass="'form-control is-invalid'">
 						<div class="input-group-append">
 							<span class="input-group-text">.00</span>
 						</div>
 					</div>
 					<div class="invalid-feedback"
-						th:if="${#fields.hasErrors('salarioMin')}"
-						th:errors="*{salarioMin}"></div>
+						th:if="${#fields.hasErrors('minSalary')}"
+						th:errors="*{minSalary}"></div>
 				</div>
 			</div>
 
 			<div class="form-group row">
-				<label for="salarioMax" class="col-sm-2 col-form-label">Salario
+				<label for="maxSalary" class="col-sm-2 col-form-label">Salario
 					máximo</label>
 				<div class="col-sm-6">
 					<div class="input-group mb-3">
 						<div class="input-group-prepend">
 							<span class="input-group-text">$</span>
 						</div>
-						<input type="text" th:field="*{salarioMax}" class="form-control"
+						<input type="text" th:field="*{maxSalary}" class="form-control"
 							th:errorclass="'form-control is-invalid'">
 						<div class="input-group-append">
 							<span class="input-group-text">.00</span>
 						</div>
 					</div>
 					<div class="invalid-feedback"
-						th:if="${#fields.hasErrors('salarioMax')}"
-						th:errors="*{salarioMax}"></div>
+						th:if="${#fields.hasErrors('maxSalary')}"
+						th:errors="*{maxSalary}"></div>
 				</div>
 			</div>
 
 			<div class="form-group row">
-				<label for="habilidadesRequeridas" class="col-sm-2 col-form-label">Habilidades
+				<label for="requiredSkills" class="col-sm-2 col-form-label">Habilidades
 					requeridas</label>
 				<div class="col-sm-6">
-					<input type="text" th:field="*{habilidadesRequeridas}"
+					<input type="text" th:field="*{requiredSkills}"
 						class="form-control" th:errorclass="'form-control is-invalid'" />
 					<div class="invalid-feedback"
-						th:if="${#fields.hasErrors('habilidadesRequeridas')}"
-						th:errors="*{habilidadesRequeridas}"></div>
+						th:if="${#fields.hasErrors('requiredSkills')}"
+						th:errors="*{requiredSkills}"></div>
 				</div>
 			</div>
 
 			<div class="form-group row">
-				<label for="habilidadesDeseadas" class="col-sm-2 col-form-label">Habilidades
+				<label for="wishableSkills" class="col-sm-2 col-form-label">Habilidades
 					deseadas</label>
 				<div class="col-sm-6">
-					<input type="text" th:field="*{habilidadesDeseadas}"
+					<input type="text" th:field="*{wishableSkills}"
 						class="form-control" th:errorclass="'form-control is-invalid'" />
 					<div class="invalid-feedback"
-						th:if="${#fields.hasErrors('habilidadesDeseadas')}"
-						th:errors="*{habilidadesDeseadas}"></div>
+						th:if="${#fields.hasErrors('wishableSkills')}"
+						th:errors="*{wishableSkills}"></div>
 				</div>
 			</div>
 
 			<div class="form-group row">
 				<div class="col-sm-6">
-					<input type="submit" th:value="${titulo}" class="btn btn-primary" />
+					<input type="submit" th:value="${title}" class="btn btn-primary" />
 				</div>
 			</div>
 

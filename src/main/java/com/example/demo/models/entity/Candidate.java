@@ -16,8 +16,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "candidatos")
-public class Candidato implements Serializable {
+@Table(name = "candidates")
+public class Candidate implements Serializable {
 
 	private static final long serialVersionUID = 876065142127572498L;
 	
@@ -26,27 +26,27 @@ public class Candidato implements Serializable {
 	private Long id;
 	
 	
-	private String nombre;
+	private String name;
 	
 	
-	private String correo;
+	private String email;
 	
 	
 	private String curriculum;
 	
-	private String habilidades;
+	private String skills;
 	
-	private boolean esCandidato;
+	private boolean isCandidate;
 	
-	@Column(name = "anios_experiencia")
-	private int aniosExperiencia;
+	@Column(name = "years_experience")
+	private int yearsExperience;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	private Vacante vacante;
+	private Vacant vacant;
 	
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "entrevista_id")
-	private List<Entrevista> entrevistas;
+	@JoinColumn(name = "interview_id")
+	private List<Interview> interviews;
 
 	public Long getId() {
 		return id;
@@ -56,20 +56,20 @@ public class Candidato implements Serializable {
 		this.id = id;
 	}
 
-	public String getNombre() {
-		return nombre;
+	public String getName() {
+		return name;
 	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public String getCorreo() {
-		return correo;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setCorreo(String correo) {
-		this.correo = correo;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getCurriculum() {
@@ -80,30 +80,46 @@ public class Candidato implements Serializable {
 		this.curriculum = curriculum;
 	}
 
-	public String getHabilidades() {
-		return habilidades;
+	public String getSkills() {
+		return skills;
 	}
 
-	public void setHabilidades(String habilidades) {
-		this.habilidades += habilidades.concat(" \n");
+	public void setSkills(String skills) {
+		this.skills = skills;
 	}
 
-	public boolean isEsCandidato() {
-		return esCandidato;
+	public boolean isCandidate() {
+		return isCandidate;
 	}
 
-	public void setEsCandidato(boolean esCandidato) {
-		this.esCandidato = esCandidato;
+	public void setCandidate(boolean isCandidate) {
+		this.isCandidate = isCandidate;
 	}
 
-	public int getAniosExperiencia() {
-		return aniosExperiencia;
-	}
-
-	public void setAniosExperiencia(int aniosExperiencia) {
-		this.aniosExperiencia = aniosExperiencia;
-	}
 	
-	
+
+	public int getYearsExperience() {
+		return yearsExperience;
+	}
+
+	public void setYearsExperience(int yearsExperience) {
+		this.yearsExperience = yearsExperience;
+	}
+
+	public Vacant getVacant() {
+		return vacant;
+	}
+
+	public void setVacant(Vacant vacant) {
+		this.vacant = vacant;
+	}
+
+	public List<Interview> getInterviews() {
+		return interviews;
+	}
+
+	public void setEntrevistas(List<Interview> interviews) {
+		this.interviews = interviews;
+	}
 
 }

@@ -5,18 +5,18 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import com.example.demo.models.entity.Vacante;
+import com.example.demo.models.entity.Vacant;
 
-public interface IVacanteService {
+public interface VacantService {
 	
-	public List<Vacante> findAll();
+	public List<Vacant> findAll();
 	
-	public void save(Vacante vacante);
+	public void save(Vacant vacant);
 	
-	public Vacante findOne(Long id);
+	public Vacant findOne(Long id);
 	
 	public void delete(Long id);
 	
-	public Page<Vacante> findAll(Pageable pageable);
+	public Page<Vacant> findAll(Pageable pageable);
 
 }

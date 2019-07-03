@@ -7,42 +7,42 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.models.dao.IVacanteDao;
-import com.example.demo.models.entity.Vacante;
+import com.example.demo.models.entity.Vacant;
+import com.example.demo.models.repository.VacantRepository;
 
 @Service
-public class VacanteServiceImpl implements IVacanteService{
+public class VacantServiceImp implements VacantService{
 	
 	@Autowired
-	private IVacanteDao vacanteDao;
+	private VacantRepository vacantRepository;
 
 	@Override
-	public List<Vacante> findAll() {
+	public List<Vacant> findAll() {
 		
-		return (List<Vacante>) vacanteDao.findAll();
+		return (List<Vacant>) vacantRepository.findAll();
 	}
 
 	@Override
-	public void save(Vacante vacante) {
-		vacanteDao.save(vacante);
+	public void save(Vacant vacant) {
+		vacantRepository.save(vacant);
 	}
 
 	@Override
-	public Vacante findOne(Long id) {
+	public Vacant findOne(Long id) {
 
-		return vacanteDao.findById(id).orElse(null);
+		return vacantRepository.findById(id).orElse(null);
 	}
 
 	@Override
 	public void delete(Long id) {
 		
-		vacanteDao.deleteById(id);
+		vacantRepository.deleteById(id);
 	}
 
 	@Override
-	public Page<Vacante> findAll(Pageable pageable) {
+	public Page<Vacant> findAll(Pageable pageable) {
 		
-		return vacanteDao.findAll(pageable);
+		return vacantRepository.findAll(pageable);
 	}
 
 }

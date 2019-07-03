@@ -18,67 +18,66 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.example.demo.models.entity.Vacante;
-import com.example.demo.models.service.IVacanteService;
+import com.example.demo.models.entity.Vacant;
+import com.example.demo.models.service.VacantService;
 import com.example.demo.util.paginator.PageRender;
 
 @Controller
 @RequestMapping("/vacante")
 @SessionAttributes("vacante")
-public class VacanteController {
+public class VacantController {
 	
 	@Autowired
-	private IVacanteService vacanteService;
+	private VacantService vacantService;
 	
 	@GetMapping({"/listar", "/"})
-	public String listarVacantes (@RequestParam(name = "page", defaultValue = "0") int page, Model model) {
+	public String list (@RequestParam(name = "page", defaultValue = "0") int page, Model model) {
 		
 		Pageable pageRequest = PageRequest.of(page, 5);
-		Page<Vacante> vacantes = vacanteService.findAll(pageRequest);
-		PageRender<Vacante> pageRender = new PageRender<Vacante>("/vacante/listar", vacantes);
+		Page<Vacant> vacants = vacantService.findAll(pageRequest);
+		PageRender<Vacant> pageRender = new PageRender<Vacant>("/vacant/list", vacants);
 		
 		model.addAttribute("page", pageRender);
-		model.addAttribute("vacantes", vacantes);
-		model.addAttribute("titulo", "Lista de vacantes");
+		model.addAttribute("vacants", vacants);
+		model.addAttribute("title", "Lista de vacantes");
 		
-		return "/vacante/listar";
+		return "/vacant/list";
 	}
 	
 	@GetMapping("/crear")
-	public String crearVacante(Model model) {
+	public String create(Model model) {
 		
-		Vacante vacante = new Vacante();
-		model.addAttribute("titulo", "Crear vacante");
-		model.addAttribute("vacante", vacante);
-		return "/vacante/form";
+		Vacant vacant = new Vacant();
+		model.addAttribute("title", "Crear vacante");
+		model.addAttribute("vacant", vacant);
+		return "/vacant/form";
 	}
 	
 	@PostMapping("/guardar")
-	public String guardarVacante(@Valid Vacante vacante, BindingResult result,
+	public String save(@Valid Vacant vacant, BindingResult result,
 			Model model, RedirectAttributes flash, SessionStatus status) {
 		
-		model.addAttribute("titulo", "Crear una vacante");
-		
+		model.addAttribute("title", "Crear una vacante");
 		if(!result.hasErrors()) {
-			String mensaje = (vacante.getId() != null) ? "Vacante actualizada con éxito": "Vacante agregada con éxito";
-			vacanteService.save(vacante);
+			String mensaje = (vacant.getId() != null) ? "Vacante actualizada con éxito": "Vacante agregada con éxito";
+			vacantService.save(vacant);
 			status.setComplete();
 			flash.addFlashAttribute("success", mensaje);
-			return "redirect:listar";
+			return "redirect:/vacante/listar";
 		}
 		
-		return "/vacante/form";
+		return "/vacant/form";
 	}
 	
 	@GetMapping("/editar/{id}")
-	public String editarVacante(@PathVariable(name = "id") Long id, Model model,
+	public String edit(@PathVariable(name = "id") Long id, Model model,
 			RedirectAttributes flash) {
 		
-		Vacante vacante = null;
+		Vacant vacant = null;
 		
 		if(id > 0) {
-			vacante = vacanteService.findOne(id);
-			if(vacante == null) {
+			vacant = vacantService.findOne(id);
+			if(vacant == null) {
 				flash.addFlashAttribute("error", "La vacante no existe");
 				return "redirect:/vacante/listar";
 			}
@@ -87,18 +86,18 @@ public class VacanteController {
 			flash.addFlashAttribute("error", "ID inválido para vacante");
 			return "redirect:/vacante/listar";
 		}
-		model.addAttribute("titulo", "Editar cliente");
-		model.addAttribute("vacante", vacante);
-		return "/vacante/form";
+		model.addAttribute("title", "Editar cliente");
+		model.addAttribute("vacant", vacant);
+		return "/vacant/form";
 	}
 	
 	@GetMapping("/eliminar/{id}")
-	public String eliminarVacante(@PathVariable(name = "id") Long id, RedirectAttributes flash) {
+	public String delete(@PathVariable(name = "id") Long id, RedirectAttributes flash) {
 		
 		if(id > 0) {
-			Vacante vacante = vacanteService.findOne(id);
-			if(vacante != null) {
-				vacanteService.delete(id);
+			Vacant vacant = vacantService.findOne(id);
+			if(vacant != null) {
+				vacantService.delete(id);
 				flash.addFlashAttribute("success", "Vacante borrada con éxito");
 			} else {
 				flash.addFlashAttribute("error", "No existe una vacante con el ID: " + id.toString());

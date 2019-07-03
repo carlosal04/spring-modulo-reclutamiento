@@ -5,7 +5,7 @@
 	<header th:replace="layout/layout :: header"></header>
 
 	<div class="container">
-		<h4 th:text="${titulo}"></h4>
+		<h4 th:text="${title}"></h4>
 		<a class="btn btn-primary btn-xs" th:href="@{/vacante/crear}"
 			th:text="'Crear vacante'"></a>
 		<table class="table table-bordered table-striped my-4">
@@ -22,21 +22,21 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr th:if="${not #lists.isEmpty(vacantes)}"
-					th:each="vacante: ${vacantes}">
-					<td th:text="${vacante.id}"></td>
-					<td th:text="${vacante.titulo}"></td>
-					<td th:text="${vacante.salarioMin}"></td>
-					<td th:text="${vacante.salarioMax}"></td>
-					<td th:text="${vacante.habilidadesRequeridas}"></td>
-					<td th:text="${vacante.habilidadesDeseadas}"></td>
-					<td><a th:href="@{'/vacante/editar/' + ${vacante.id}}"
-						class="btn btn-success btn-xs" th:text="'Editar'"></a></td>
-					<td><a th:href="@{'/vacante/eliminar/' + ${vacante.id}}"
-						class="btn btn-danger btn-xs" th:text="'Eliminar'"></a></td>
-				</tr>
-				<tr class="text-center" th:if="${#lists.isEmpty(vacantes)}">
+				<tr class="text-center" th:if="${#lists.isEmpty(vacants)}">
 					<td colspan="8">No hay vacantes para mostrar</td>
+				</tr>
+				<tr th:if="${not #lists.isEmpty(vacants)}"
+					th:each="vacant: ${vacants}">
+					<td th:text="${vacant.id}"></td>
+					<td th:text="${vacant.title}"></td>
+					<td th:text="${vacant.minSalary}"></td>
+					<td th:text="${vacant.maxSalary}"></td>
+					<td th:text="${vacant.requiredSkills}"></td>
+					<td th:text="${vacant.wishableSkills}"></td>
+					<td><a th:href="@{'/vacante/editar/' + ${vacant.id}}"
+						class="btn btn-success btn-xs" th:text="'Editar'"></a></td>
+					<td><a th:href="@{'/vacante/eliminar/' + ${vacant.id}}"
+						class="btn btn-danger btn-xs" th:text="'Eliminar'"></a></td>
 				</tr>
 			</tbody>
 		</table>

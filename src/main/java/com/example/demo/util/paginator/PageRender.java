@@ -10,42 +10,42 @@ public class PageRender<T> {
 	private String url;
 	private Page<T> page;
 	
-	private int totalPaginas;
+	private int totalPages;
 	
-	private int numElementosPorPagina;
+	private int elementsByPage;
 	
-	private int paginaActual;
+	private int currentPage;
 	
-	private List<PageItem> paginas;
+	private List<PageItem> pages;
 	
 	public PageRender(String url, Page<T> page) {
 		this.url = url;
 		this.page = page;
-		this.paginas = new ArrayList<PageItem>();
+		this.pages = new ArrayList<PageItem>();
 		
-		numElementosPorPagina = page.getSize();
-		totalPaginas = page.getTotalPages();
-		paginaActual = page.getNumber() + 1;
+		elementsByPage = page.getSize();
+		totalPages = page.getTotalPages();
+		currentPage = page.getNumber() + 1;
 		
-		int desde, hasta;
-		if(totalPaginas <= numElementosPorPagina) {
-			desde = 1;
-			hasta = totalPaginas;
+		int from, to;
+		if(totalPages <= elementsByPage) {
+			from = 1;
+			to = totalPages;
 		} else {
-			if(paginaActual <= numElementosPorPagina/2) {
-				desde = 1;
-				hasta = numElementosPorPagina;
-			} else if(paginaActual >= totalPaginas - numElementosPorPagina/2 ) {
-				desde = totalPaginas - numElementosPorPagina + 1;
-				hasta = numElementosPorPagina;
+			if(currentPage <= elementsByPage/2) {
+				from = 1;
+				to = elementsByPage;
+			} else if(currentPage >= totalPages - elementsByPage/2 ) {
+				from = totalPages - elementsByPage + 1;
+				to = elementsByPage;
 			} else {
-				desde = paginaActual -numElementosPorPagina/2;
-				hasta = numElementosPorPagina;
+				from = currentPage -elementsByPage/2;
+				to = elementsByPage;
 			}
 		}
 		
-		for(int i=0; i < hasta; i++) {
-			paginas.add(new PageItem(desde + i, paginaActual == desde+i));
+		for(int i=0; i < to; i++) {
+			pages.add(new PageItem(from + i, currentPage == from+i));
 		}
 
 	}
@@ -53,19 +53,31 @@ public class PageRender<T> {
 	public String getUrl() {
 		return url;
 	}
-
-	public int getTotalPaginas() {
-		return totalPaginas;
-	}
-
-	public int getPaginaActual() {
-		return paginaActual;
-	}
-
-	public List<PageItem> getPaginas() {
-		return paginas;
-	}
 	
+	public int getTotalPages() {
+		return totalPages;
+	}
+
+	public void setTotalPages(int totalPages) {
+		this.totalPages = totalPages;
+	}
+
+	public int getCurrentPage() {
+		return currentPage;
+	}
+
+	public void setCurrentPage(int currentPage) {
+		this.currentPage = currentPage;
+	}
+
+	public List<PageItem> getPages() {
+		return pages;
+	}
+
+	public void setPages(List<PageItem> pages) {
+		this.pages = pages;
+	}
+
 	public boolean isFirst() {
 		return page.isFirst();
 	}

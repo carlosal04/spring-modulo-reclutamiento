@@ -13,8 +13,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "entrevistas")
-public class Entrevista implements Serializable {
+@Table(name = "interviews")
+public class Interview implements Serializable {
 
 	private static final long serialVersionUID = 4551314538701339817L;
 	
@@ -22,21 +22,21 @@ public class Entrevista implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	private LocalDate fecha;
+	private LocalDate date;
 	
-	private LocalTime hora;
+	private LocalTime time;
 	
-	private String tipoEntrevista;
+	private String interviewType;
 	
-	private String retroalimentacion;
+	private String feedback;
 	
-	private boolean esAprobado;
-	
-	@ManyToOne(fetch = FetchType.LAZY)
-	private Candidato candidato;
+	private boolean isAproved;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	private Empleado empleado;
+	private Candidate candidate;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	private Employee employee;
 
 	public Long getId() {
 		return id;
@@ -46,54 +46,64 @@ public class Entrevista implements Serializable {
 		this.id = id;
 	}
 
-	public LocalDate getFecha() {
-		return fecha;
+	public LocalDate getDate() {
+		return date;
 	}
 
-	public void setFecha(LocalDate fecha) {
-		this.fecha = fecha;
+	public void setDate(LocalDate date) {
+		this.date = date;
 	}
 
-	public LocalTime getHora() {
-		return hora;
+	public LocalTime getTime() {
+		return time;
 	}
 
-	public void setHora(LocalTime hora) {
-		this.hora = hora;
+	public void setTime(LocalTime time) {
+		this.time = time;
 	}
 
-	public String getTipoEntrevista() {
-		return tipoEntrevista;
-	}
-
-	public void setTipoEntrevista(String tipoEntrevista) {
-		this.tipoEntrevista = tipoEntrevista;
-	}
-
-	public String getRetroalimentacion() {
-		return retroalimentacion;
-	}
-
-	public void setRetroalimentacion(String retroalimentacion) {
-		this.retroalimentacion = retroalimentacion;
-	}
-
-	public boolean isEsAprobado() {
-		return esAprobado;
-	}
-
-	public void setEsAprobado(boolean esAprobado) {
-		this.esAprobado = esAprobado;
-	}
-
-	public Candidato getCandidato() {
-		return candidato;
-	}
-
-	public void setCandidato(Candidato candidato) {
-		this.candidato = candidato;
-	}
 	
+
+	public String getInterviewType() {
+		return interviewType;
+	}
+
+	public void setInterviewType(String interviewType) {
+		this.interviewType = interviewType;
+	}
+
+	public String getFeedback() {
+		return feedback;
+	}
+
+	public void setFeedback(String feedback) {
+		this.feedback = feedback;
+	}
+
+	public boolean isAproved() {
+		return isAproved;
+	}
+
+	public void setAproved(boolean isAproved) {
+		this.isAproved = isAproved;
+	}
+
+	public Candidate getCandidate() {
+		return candidate;
+	}
+
+	public void setCandidate(Candidate candidate) {
+		this.candidate = candidate;
+	}
+
+	public Employee getEmployee() {
+		return employee;
+	}
+
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
+	}
+
 	
 
 }
