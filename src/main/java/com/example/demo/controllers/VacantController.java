@@ -35,7 +35,7 @@ public class VacantController {
 		
 		Pageable pageRequest = PageRequest.of(page, 5);
 		Page<Vacant> vacants = vacantService.findAll(pageRequest);
-		PageRender<Vacant> pageRender = new PageRender<Vacant>("/vacant/list", vacants);
+		PageRender<Vacant> pageRender = new PageRender<Vacant>("/vacante/listar", vacants);
 		
 		model.addAttribute("page", pageRender);
 		model.addAttribute("vacants", vacants);
@@ -50,6 +50,7 @@ public class VacantController {
 		Vacant vacant = new Vacant();
 		model.addAttribute("title", "Crear vacante");
 		model.addAttribute("vacant", vacant);
+		model.addAttribute("action", "Actualizar vacante");
 		return "/vacant/form";
 	}
 	
@@ -88,6 +89,7 @@ public class VacantController {
 		}
 		model.addAttribute("title", "Editar cliente");
 		model.addAttribute("vacant", vacant);
+		model.addAttribute("action", "Editar vacante");
 		return "/vacant/form";
 	}
 	
@@ -106,6 +108,27 @@ public class VacantController {
 			flash.addFlashAttribute("error", "ID de vacante inválida");
 		}
 		return"redirect:/vacante/listar";
+	}
+	
+	@GetMapping("/detalle/{id}")
+	public String detail(@PathVariable(name ="id") Long id, Model model,
+			RedirectAttributes flash) {
+		
+		Vacant vacant = null;
+		if(id > 0) {
+			vacant = vacantService.findOne(id);
+			if(vacant == null) {
+				flash.addFlashAttribute("error", "No se encuentra la vacante en la base de datos");
+				return "redirect:/vacante/listar";
+			}
+		} else {
+			flash.addFlashAttribute("error", "El ID de la vacante no es válido");
+			return "redirect:/vacante/listar";
+		}
+		model.addAttribute("title", "Detalles de la vacante");
+		model.addAttribute("vacant", vacant);
+		return "/vacant/detail";
+		
 	}
 
 }

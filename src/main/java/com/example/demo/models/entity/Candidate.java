@@ -36,7 +36,8 @@ public class Candidate implements Serializable {
 	
 	private String skills;
 	
-	private boolean isCandidate;
+	@Column(name = "still_candidate", columnDefinition="tinyint(1) default 1")
+	private boolean stillCandidate;
 	
 	@Column(name = "years_experience")
 	private int yearsExperience;
@@ -88,15 +89,13 @@ public class Candidate implements Serializable {
 		this.skills = skills;
 	}
 
-	public boolean isCandidate() {
-		return isCandidate;
+	public boolean isStillCandidate() {
+		return stillCandidate;
 	}
 
-	public void setCandidate(boolean isCandidate) {
-		this.isCandidate = isCandidate;
+	public void setStillCandidate(boolean stillCandidate) {
+		this.stillCandidate = stillCandidate;
 	}
-
-	
 
 	public int getYearsExperience() {
 		return yearsExperience;
@@ -121,5 +120,7 @@ public class Candidate implements Serializable {
 	public void setEntrevistas(List<Interview> interviews) {
 		this.interviews = interviews;
 	}
+	
+	
 
 }

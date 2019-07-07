@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body>
+	<header th:replace="layout/layout :: header"></header>
+
+	<div class="container my-4">
+		<h4 th:text="${title}"></h4>
+		<a class="btn btn-primary btn-xs my-2" th:href="@{/Candidato/crear}" th:text="'Registrar candidato'"></a>
+		<!-- Begin card -->
+		<div class="card">
+			<h5 class="card-header" th:text="'Vacante ' + ${vacant.id}"></h5>
+			<div class="card-body">
+				<h5 class="card-title" th:text="${vacant.title}"></h5>
+				<p class="card-text font-weight-bold">
+					Salario mínimo: <span class="font-weight-normal"
+						th:text="'$'+${vacant.minSalary}"></span>
+				</p>
+				<p class="card-text font-weight-bold">
+					Salario máximo: <span class="font-weight-normal"
+						th:text="'$'+${vacant.maxSalary}"></span>
+				</p>
+				<p class="card-text font-weight-bold">
+					Habilidades requeridas: <span class="font-weight-normal"
+						th:text="${vacant.requiredSkills}"></span>
+				</p>
+				<p class="card-text font-weight-bold">
+					Habilidades deseadas: <span class="font-weight-normal"
+						th:text="${vacant.wishableSkills}"></span>
+				</p>
+			</div>
+		</div>
+		<!-- End card -->
+		<!-- Begin Table -->
+		<table class="table table-bordered table-striped my-4">
+			<thead class="thead-dark">
+				<tr>
+					<th>ID</th>
+					<th>Nombre</th>
+					<th>Correo</th>
+					<th>CV</th>
+					<th>Habilidades</th>
+					<th>Experiencia</th>
+					<th>¿Es candidato?</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:if="${#lists.isEmpty(vacant.candidates)}">
+					<td class="text-center" colspan="7" th:text="'No hay datos para mostrar'"></td>
+				</tr>
+				<tr th:if="${not #lists.isEmpty(vacant.candidates)}" th:each="candidate: ${vacant.candidates}">
+					<td th:text="${candidate.id}"></td>
+					<td th:text="${candidate.name}"></td>
+					<td th:text="${candidate.email}"></td>
+					<td th:text="${candidate.curriculum}"></td>
+					<td th:text="${candidate.skills}"></td>
+					<td class="text-center" th:text="${candidate.yearsExperience} + ' Años'"></td>
+					<td class="text-center" th:text="${(candidate.stillCandidate)?'Si':'No'}"></td>
+				</tr>
+			</tbody>
+		</table>
+		<!-- End Table -->
+	</div>
+
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

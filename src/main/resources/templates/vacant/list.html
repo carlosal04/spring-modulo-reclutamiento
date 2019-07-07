@@ -17,6 +17,7 @@
 					<th>Salario máximo</th>
 					<th>Habilidades requeridas</th>
 					<th>Habilidades deseables</th>
+					<th>Detalle</th>
 					<th>Editar</th>
 					<th>Eliminar</th>
 				</tr>
@@ -33,10 +34,14 @@
 					<td th:text="${vacant.maxSalary}"></td>
 					<td th:text="${vacant.requiredSkills}"></td>
 					<td th:text="${vacant.wishableSkills}"></td>
+					<td>
+						<a th:href="@{/vacante/detalle/} + ${vacant.id}"
+						class="btn btn-primary btn-sm" th:text="'Detalle'"></a>
+					</td>
 					<td><a th:href="@{'/vacante/editar/' + ${vacant.id}}"
-						class="btn btn-success btn-xs" th:text="'Editar'"></a></td>
+						class="btn btn-success btn-sm" th:text="'Editar'"></a></td>
 					<td><a th:href="@{'/vacante/eliminar/' + ${vacant.id}}"
-						class="btn btn-danger btn-xs" th:text="'Eliminar'"></a></td>
+						class="btn btn-danger btn-sm" th:text="'Eliminar'"></a></td>
 				</tr>
 			</tbody>
 		</table>
